@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>787683175754-kpq463202m420flftescovvsfrdok9if.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.787683175754-kpq463202m420flftescovvsfrdok9if</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB4X64StEMdZNbNQW9OCXdnKUjDs6hYodw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>787683175754</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.clinicaltrac.app</string>
+	<key>PROJECT_ID</key>
+	<string>clinical-trac-1572429876166</string>
+	<key>STORAGE_BUCKET</key>
+	<string>clinical-trac-1572429876166.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:787683175754:ios:4076a1e14720a6219325b3</string>
+</dict>
+</plist>

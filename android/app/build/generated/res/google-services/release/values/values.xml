@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">787683175754-a67v4hn01m8saaqrv9t8gu4f437a43u2.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">787683175754</string>
+    <string name="google_api_key" translatable="false">AIzaSyBhgEHuGeZ4h3F8Nn16wziZ39h1UdeVnvM</string>
+    <string name="google_app_id" translatable="false">1:787683175754:android:da247d3341de12199325b3</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBhgEHuGeZ4h3F8Nn16wziZ39h1UdeVnvM</string>
+    <string name="google_storage_bucket" translatable="false">clinical-trac-1572429876166.appspot.com</string>
+    <string name="project_id" translatable="false">clinical-trac-1572429876166</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "787683175754",
+    "project_id": "clinical-trac-1572429876166",
+    "storage_bucket": "clinical-trac-1572429876166.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787683175754:android:da247d3341de12199325b3",
+        "android_client_info": {
+          "package_name": "com.clinicaltrac.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787683175754-a67v4hn01m8saaqrv9t8gu4f437a43u2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhgEHuGeZ4h3F8Nn16wziZ39h1UdeVnvM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787683175754-a67v4hn01m8saaqrv9t8gu4f437a43u2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
