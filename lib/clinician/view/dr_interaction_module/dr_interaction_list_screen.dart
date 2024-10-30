@@ -501,7 +501,7 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
                       //                       overflow: TextOverflow.ellipsis,
                       //                       style: Theme.of(context)
                       //                           .textTheme
-                      //                           .titleLarge
+                      //                           .headline6
                       //                           ?.copyWith(
                       //                           fontWeight:
                       //                           FontWeight.w400,
@@ -669,31 +669,30 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return UserDrInteractionContainerWidget(
-                              // onTap: () {
-                              //   setState(() {});
-                              //   Navigator.pushNamed(
-                              //     context,
-                              //     Routes.addDrInteractionScreen,
-                              //     arguments: AddViewDrIntgeractionData(
-                              //         rotationId: widget.drIntraction.rotationId,
-                              //         rotationTitle:
-                              //             widget.drIntraction.rotationName,
-                              //         drIntractionAction: DrIntractionAction.edit,
-                              //         drIntraction: widget.drIntraction,
-                              //         isFromDashboard: widget.isFromDashboard),
-                              //   );
-                              //   addNewInteractionAsPerPageChange();
-                              // },
+                            // onTap: () {
+                            //   setState(() {});
+                            //   Navigator.pushNamed(
+                            //     context,
+                            //     Routes.addDrInteractionScreen,
+                            //     arguments: AddViewDrIntgeractionData(
+                            //         rotationId: widget.drIntraction.rotationId,
+                            //         rotationTitle:
+                            //             widget.drIntraction.rotationName,
+                            //         drIntractionAction: DrIntractionAction.edit,
+                            //         drIntraction: widget.drIntraction,
+                            //         isFromDashboard: widget.isFromDashboard),
+                            //   );
+                            //   addNewInteractionAsPerPageChange();
+                            // },
                               color: initialColor
                                   .elementAt(index % initialColor.length),
-                              drInteractionListData:
-                                  drInteractionListData[index],
+                              drInteractionListData: drInteractionListData[index],
                               isFromDashboard: false,
-                              interactionDecCount: userDrInteractionData
-                                  .interactionDescriptionCount!,
+                              interactionDecCount: userDrInteractionData.interactionDescriptionCount!,
                               // pullToRefresh: addNewInteractionAsPerPageChange,
                               pullToRefresh: pullToRefresh,
-                              onTapDelete: () {});
+                              onTapDelete: () {
+                             });
                           //   CommonListContainerWidget(
                           //   mainTitle:
                           //       drInteractionListData[index].studentFullName,

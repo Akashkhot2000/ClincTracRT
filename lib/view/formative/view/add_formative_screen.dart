@@ -130,15 +130,13 @@ class _AddFormativeScreenState extends State<AddFormativeScreen> {
 
                               setState(() {
                                 EvaluationDate = results!.first!;
-                                EvaulationDateText.text =
-                                    DateFormat('MM-dd-yyyy')
-                                        .format(EvaluationDate);
+                                EvaulationDateText.text = DateFormat('MM-dd-yyyy')
+                                    .format(EvaluationDate);
                               });
                             },
                             sufix: GestureDetector(
                               onTap: () async {
-                                var results =
-                                    await showCalendarDatePicker2Dialog(
+                                var results = await showCalendarDatePicker2Dialog(
                                   context: context,
                                   value: [EvaluationDate],
                                   config:
@@ -160,8 +158,7 @@ class _AddFormativeScreenState extends State<AddFormativeScreen> {
                               child: Padding(
                                 padding: EdgeInsets.all(10.0),
                                 child: CircleAvatar(
-                                  backgroundColor:
-                                      Color(Hardcoded.primaryGreen),
+                                  backgroundColor: Color(Hardcoded.primaryGreen),
                                   child: SvgPicture.asset(
                                     'assets/images/calendar.svg',
                                   ),
@@ -245,8 +242,8 @@ class _AddFormativeScreenState extends State<AddFormativeScreen> {
                                         .then((value) =>
                                             AppHelper.buildErrorSnackbar(
                                                 context,
-                                                dataResponseModel.errorResponse
-                                                    .errorMessage));
+                                                dataResponseModel
+                                                    .errorResponse.errorMessage));
                                     Future.delayed(const Duration(seconds: 2),
                                         () {
                                       create.reset();
@@ -258,8 +255,8 @@ class _AddFormativeScreenState extends State<AddFormativeScreen> {
                                     create.reset();
                                   });
                                   if (EvaulationDateText.text.isEmpty) {
-                                    AppHelper.buildErrorSnackbar(context,
-                                        "Please enter evaluation date");
+                                    AppHelper.buildErrorSnackbar(
+                                        context, "Please enter evaluation date");
                                     return false;
                                   }
                                   if (phoneNmber.text.isEmpty) {
@@ -299,8 +296,7 @@ class _AddFormativeScreenState extends State<AddFormativeScreen> {
                                   RotationForEvalListData c =
                                       value as RotationForEvalListData;
                                   selectedRotationValue = c;
-                                  selectedRotation =
-                                      selectedRotationValue.title!;
+                                  selectedRotation = selectedRotationValue.title!;
                                   selectedRotationId =
                                       selectedRotationValue.rotationId!;
                                 });
@@ -344,7 +340,7 @@ class _AddFormativeScreenState extends State<AddFormativeScreen> {
                                             overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .titleLarge
+                                                .headline6
                                                 ?.copyWith(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 14,

@@ -147,8 +147,8 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
     Box<UserLoginResponseHive>? box = Boxes.getUserInfo();
     final DataService dataService = locator();
     final DataResponseModel dataResponseModel = await dataService.getRotations(
-      box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-      box.get(Hardcoded.hiveBoxKey)!.accessToken,
+       box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+       box.get(Hardcoded.hiveBoxKey)!.accessToken,
       "false",
     );
     RotationListStudentJournal rotationListJournal =
@@ -165,8 +165,8 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
     final DataService dataService = locator();
     final DataResponseModel dataResponseModel =
         await dataService.getClinicianList(
-      box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-      box.get(Hardcoded.hiveBoxKey)!.accessToken,
+       box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+       box.get(Hardcoded.hiveBoxKey)!.accessToken,
       selectedRotationId.isEmpty ? widget.rotationID : selectedRotationId,
     );
     ClinicianDataList clinicianDataList =
@@ -329,8 +329,8 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                       if (validationsForAdd()) {
                         dataResponseModel =
                             await dataService.saveStudentDrInteraction(
-                          box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-                          box.get(Hardcoded.hiveBoxKey)!.accessToken,
+                           box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+                           box.get(Hardcoded.hiveBoxKey)!.accessToken,
                           selectedRotationId.isEmpty
                               ? widget.rotationID
                               : selectedRotationId,
@@ -377,8 +377,8 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                         dataResponseModel =
                             await dataService.editStudentDrInteraction(
                           widget.drIntraction!.interactionId,
-                          box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-                          box.get(Hardcoded.hiveBoxKey)!.accessToken,
+                           box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+                           box.get(Hardcoded.hiveBoxKey)!.accessToken,
                           widget.drIntraction!.rotationId,
                           selectedClinicianId,
                           DateFormat('yyyy-MM-dd')
@@ -643,7 +643,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(right: globalWidth * 0.05),
+                      padding:  EdgeInsets.only(right: globalWidth * 0.05),
                       child: Text(
                         'e.g.If Minutes, i.e. 01 equals 1 minute',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -696,25 +696,16 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                       enabled:
                           widget.drIntractionAction != DrIntractionAction.view,
                       buildCounter: (context,
-                          {required currentLength,
-                          required isFocused,
-                          maxLength}) {
-                        return Visibility(
-                          visible: studentResponseController.text.length <=
-                              int.parse("${widget.interactionDecCount}"),
+                          {required currentLength, required isFocused, maxLength}) {
+                        return  Visibility(
+                          visible: studentResponseController.text.length <= int.parse("${widget.interactionDecCount}"),
                           child: Align(
                             alignment: Alignment.centerRight,
-                            child: Text(
-                              "${studentResponseController.text.length} characters (Minimum ${widget.interactionDecCount} characters)",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 10,
-                                    color: Color(Hardcoded.greyText),
-                                  ),
-                            ),
+                            child:  Text("${studentResponseController.text.length} characters (Minimum ${widget.interactionDecCount} characters)",  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
+                              color: Color(Hardcoded.greyText),
+                            ),),
                           ),
                           replacement: SizedBox(),
                         );
@@ -866,8 +857,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                                 selectedRotationValue.rotationId.toString();
                             getClinicianNameList();
                             store.dispatch(GetClinicianListAction(
-                                rotationId: selectedRotationValue.rotationId
-                                    .toString()));
+                                rotationId: selectedRotationValue.rotationId.toString()));
                           });
                           log("id---------${selectedRotationValue.rotationId}");
                         },
@@ -907,7 +897,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleLarge
+                                              .headline6
                                               ?.copyWith(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 14,
@@ -956,12 +946,12 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                     ),
                     ExpansionWidget<Datum>(
                         inputText: "Hospital Site Unit",
-                        hintText: selectedHospitalSiteUnit.isNotEmpty
-                            ? selectedHospitalSiteUnit
-                            : "Select hospital site unit",
-                        textColor: selectedHospitalSiteUnit.isNotEmpty
-                            ? Colors.black
-                            : Color(Hardcoded.greyText),
+                        hintText: selectedHospitalSiteUnit.isNotEmpty ?
+                             selectedHospitalSiteUnit:"Select hospital site unit",
+                        textColor:
+                            selectedHospitalSiteUnit.isNotEmpty
+                                ? Colors.black
+                                : Color(Hardcoded.greyText),
                         enabled: widget.drIntractionAction !=
                             DrIntractionAction.view,
                         OnSelection: (value) {
@@ -1011,7 +1001,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                                       //     // widget.hintText,
                                       //     maxLines: 1,
                                       //     overflow: TextOverflow.ellipsis,
-                                      //     style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                      //     style: Theme.of(context).textTheme.headline6?.copyWith(
                                       //         fontWeight: FontWeight.w400,
                                       //         fontSize: 14,
                                       //         color: Color(Hardcoded.greyText))),
@@ -1058,7 +1048,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                                   ? Colors.black
                                   : Color(Hardcoded.greyText),
                           enabled: widget.drIntractionAction ==
-                                  DrIntractionAction.add
+                              DrIntractionAction.add
                               ? true
                               : false,
                           // isSearch: true,

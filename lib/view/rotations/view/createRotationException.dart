@@ -944,7 +944,7 @@ class _CreateRotationExceptionScreenState
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.black, // button text color
+                primary: Colors.black, // button text color
               ),
             ),
           ),

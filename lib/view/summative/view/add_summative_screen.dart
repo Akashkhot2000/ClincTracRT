@@ -107,7 +107,7 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
             fontSize: 21,
             // merge: true,
           ),
-          body: NoInternet(
+          body:NoInternet(
             child: Container(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -143,15 +143,13 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
 
                               setState(() {
                                 EvaluationDate = results!.first!;
-                                EvaulationDateText.text =
-                                    DateFormat('MM-dd-yyyy')
-                                        .format(EvaluationDate);
+                                EvaulationDateText.text = DateFormat('MM-dd-yyyy')
+                                    .format(EvaluationDate);
                               });
                             },
                             sufix: GestureDetector(
                               onTap: () async {
-                                var results =
-                                    await showCalendarDatePicker2Dialog(
+                                var results = await showCalendarDatePicker2Dialog(
                                   context: context,
                                   value: [EvaluationDate],
                                   config:
@@ -173,8 +171,7 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
                               child: Padding(
                                 padding: EdgeInsets.all(10.0),
                                 child: CircleAvatar(
-                                  backgroundColor:
-                                      Color(Hardcoded.primaryGreen),
+                                  backgroundColor: Color(Hardcoded.primaryGreen),
                                   child: SvgPicture.asset(
                                     'assets/images/calendar.svg',
                                   ),
@@ -258,8 +255,8 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
                                         .then((value) =>
                                             AppHelper.buildErrorSnackbar(
                                                 context,
-                                                dataResponseModel.errorResponse
-                                                    .errorMessage));
+                                                dataResponseModel
+                                                    .errorResponse.errorMessage));
                                     Future.delayed(const Duration(seconds: 2),
                                         () {
                                       create.reset();
@@ -271,8 +268,8 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
                                     create.reset();
                                   });
                                   if (EvaulationDateText.text.isEmpty) {
-                                    AppHelper.buildErrorSnackbar(context,
-                                        "Please enter evaluation date");
+                                    AppHelper.buildErrorSnackbar(
+                                        context, "Please enter evaluation date");
                                     return false;
                                   }
                                   if (phoneNmber.text.isEmpty) {
@@ -315,8 +312,7 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
                                   RotationForEvalListData c =
                                       value as RotationForEvalListData;
                                   selectedRotationValue = c;
-                                  selectedRotation =
-                                      selectedRotationValue.title!;
+                                  selectedRotation = selectedRotationValue.title!;
                                   selectedRotationId =
                                       selectedRotationValue.rotationId!;
                                 });
@@ -329,8 +325,7 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
                                     List<String> title = text.split("(");
                                     String subText = title[1];
                                     List<String> subTitle = subText.split(")");
-                                    return DropdownItem<
-                                        RotationForEvalListData>(
+                                    return DropdownItem<RotationForEvalListData>(
                                       value: item,
                                       child: Padding(
                                         padding: EdgeInsets.only(
@@ -361,13 +356,13 @@ class _AddSummativeScreenState extends State<AddSummativeScreen> {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .titleLarge
+                                                    .headline6
                                                     ?.copyWith(
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         fontSize: 14,
-                                                        color: Color(Hardcoded
-                                                            .greyText))),
+                                                        color: Color(
+                                                            Hardcoded.greyText))),
                                           ],
                                         ),
                                       ),

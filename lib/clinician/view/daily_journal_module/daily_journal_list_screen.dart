@@ -33,9 +33,9 @@ import 'package:intl/intl.dart';
 import 'package:ios_keyboard_action/ios_keyboard_action.dart';
 
 class DailyJournalListScreen extends StatefulWidget {
-  DailyJournalListScreen({
+   DailyJournalListScreen({
     required this.route,
-    this.rotationDetailListData,
+     this.rotationDetailListData,
     super.key,
   });
   DailyJournalRoute route;
@@ -69,8 +69,7 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
   Box<UserLoginResponseHive>? box = Boxes.getUserInfo();
   List<StudentDropdownData> studentDropdownData = <StudentDropdownData>[];
   StudentDropdownData selectedStudentValue = new StudentDropdownData();
-  StudentDropdownListModel studentDropdownListModel =
-      StudentDropdownListModel(data: []);
+  StudentDropdownListModel studentDropdownListModel = StudentDropdownListModel(data: []);
 
   Future<void> studentListData() async {
     UserDatRepo userDatRepo = UserDatRepo();
@@ -81,12 +80,12 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
       userType: AppConsts.userType,
     );
     return userDatRepo.studentDropdownList(request,
-        (StudentDropdownListModel studentDropdownListModel) {
-      setState(() {
-        studentDropdownData = studentDropdownListModel.data;
-      });
-      return null;
-    }, () {}, context);
+            (StudentDropdownListModel studentDropdownListModel) {
+          setState(() {
+            studentDropdownData = studentDropdownListModel.data;
+          });
+          return null;
+        }, () {}, context);
   }
 
   void getDailyJournalListData() async {
@@ -102,9 +101,8 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
         userId: box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
         userType: AppConsts.userType,
         roleType: box.get(Hardcoded.hiveBoxKey)!.loggedUserRoleType,
-        RotationId: widget.route == DailyJournalRoute.direct
-            ? ""
-            : widget.rotationDetailListData!.rotationId!,
+        RotationId: widget.route == DailyJournalRoute
+            .direct ? "": widget.rotationDetailListData!.rotationId!,
         fromDate:
             fromDate.text.isEmpty ? "" : DateFormat('yyyy-MM-dd').format(from),
         todate: toDate.text.isEmpty ? "" : DateFormat('yyyy-MM-dd').format(to),
@@ -258,167 +256,165 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
           backgroundColor: Color(Hardcoded.white),
           body:
               // items.length != 1 ?
-              widget.route == DailyJournalRoute.direct
-                  // AppConsts.isFromDashboard == false
+          widget.route == DailyJournalRoute.direct
+              // AppConsts.isFromDashboard == false
                   ? Stack(
                       children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 17, right: 17),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ExpansionWidget<StudentDropdownData>(
-                                hintText: selectedStudentValue.title != "All"
-                                    ? "All"
-                                    : '',
-                                // enabled: selectAllCourseTopic.toString().isEmpty
-                                //     ? true
-                                //     : false,
-                                textColor: Colors.black,
-                                OnSelection: (value) {
-                                  setState(() {
-                                    StudentDropdownData c =
-                                        value as StudentDropdownData;
-                                    selectedStudentValue = c;
-                                    // singleCourseTopicList.clear();
-                                    selectedStudentId = selectedStudentValue
-                                        .studentId
-                                        .toString();
-                                    selectedStudent =
-                                        selectedStudentValue.title.toString();
-                                    pageNo = 1;
-                                    searchEditingController.text = '';
-                                    isSearchClicked = false;
-                                    getDailyJournalListData();
-                                  });
-                                  // log("id---------${selectedStudentValue.studentId}");
-                                },
-                                items: List.of(
-                                  studentDropdownData.map(
-                                    (item) {
-                                      String text = item.title.toString();
-                                      return DropdownItem<StudentDropdownData>(
-                                        value: item,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 8.0,
-                                              left: globalWidth * 0.06,
-                                              right: globalWidth * 0.06,
-                                              bottom: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                text,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyMedium!
-                                                    .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                      color: Colors.black,
-                                                    ),
-                                              ),
-                                            ],
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 17, right: 17),
+                          child:  Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: ExpansionWidget<StudentDropdownData>(
+                                  hintText:
+                                  selectedStudentValue.title != "All" ? "All" : '',
+                                  // enabled: selectAllCourseTopic.toString().isEmpty
+                                  //     ? true
+                                  //     : false,
+                                  textColor: Colors.black,
+                                  OnSelection: (value) {
+                                    setState(() {
+                                      StudentDropdownData c = value as StudentDropdownData;
+                                      selectedStudentValue = c;
+                                      // singleCourseTopicList.clear();
+                                      selectedStudentId =
+                                          selectedStudentValue.studentId.toString();
+                                      selectedStudent =
+                                          selectedStudentValue.title.toString();
+                                      pageNo = 1;
+                                      searchEditingController.text = '';
+                                      isSearchClicked = false;
+                                      getDailyJournalListData();
+                                    });
+                                    // log("id---------${selectedStudentValue.studentId}");
+                                  },
+                                  items: List.of(
+                                    studentDropdownData.map(
+                                          (item) {
+                                        String text = item.title.toString();
+                                        return DropdownItem<StudentDropdownData>(
+                                          value: item,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 8.0,
+                                                left: globalWidth * 0.06,
+                                                right: globalWidth * 0.06,
+                                                bottom: 8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  text,
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium!
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            // Padding(
-                            //   padding:  EdgeInsets.only(left: 2,top: 0.013.sh),
-                            //   child: Container(
-                            //     height: 0.07.sh,
-                            //     width: 0.08.sw,
-                            //     color: Colors.white,
-                            //     child: GestureDetector(
-                            //       onTap: (){
-                            //         DropDownState(
-                            //           DropDown(
-                            //             isDismissible: true,
-                            //             bottomSheetTitle: const Text(
-                            //               "Select Course",
-                            //               style: TextStyle(
-                            //                 fontWeight: FontWeight.bold,
-                            //                 fontSize: 20.0,
-                            //               ),
-                            //             ),
-                            //             submitButtonChild: const Text(
-                            //               'Done',
-                            //               style: TextStyle(
-                            //                 fontSize: 16,
-                            //                 fontWeight: FontWeight.bold,
-                            //               ),
-                            //             ),
-                            //             data: rankDropdownData ?? [],
-                            //             selectedItems: (List<dynamic> selectedList) {
-                            //               List<String> list = [];
-                            //               for (var item in selectedList) {
-                            //                 if (item is SelectedListItem) {
-                            //                   list.add(item.name);
-                            //                 }
-                            //               }
-                            //               log(list.toString());
-                            //             },
-                            //             // enableMultipleSelection: false,
-                            //           ),
-                            //         ).showModal(context);
-                            //       },
-                            //       child: SvgPicture.asset(
-                            //         'assets/images/filter.svg',
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
+                              // Padding(
+                              //   padding:  EdgeInsets.only(left: 2,top: 0.013.sh),
+                              //   child: Container(
+                              //     height: 0.07.sh,
+                              //     width: 0.08.sw,
+                              //     color: Colors.white,
+                              //     child: GestureDetector(
+                              //       onTap: (){
+                              //         DropDownState(
+                              //           DropDown(
+                              //             isDismissible: true,
+                              //             bottomSheetTitle: const Text(
+                              //               "Select Course",
+                              //               style: TextStyle(
+                              //                 fontWeight: FontWeight.bold,
+                              //                 fontSize: 20.0,
+                              //               ),
+                              //             ),
+                              //             submitButtonChild: const Text(
+                              //               'Done',
+                              //               style: TextStyle(
+                              //                 fontSize: 16,
+                              //                 fontWeight: FontWeight.bold,
+                              //               ),
+                              //             ),
+                              //             data: rankDropdownData ?? [],
+                              //             selectedItems: (List<dynamic> selectedList) {
+                              //               List<String> list = [];
+                              //               for (var item in selectedList) {
+                              //                 if (item is SelectedListItem) {
+                              //                   list.add(item.name);
+                              //                 }
+                              //               }
+                              //               log(list.toString());
+                              //             },
+                              //             // enableMultipleSelection: false,
+                              //           ),
+                              //         ).showModal(context);
+                              //       },
+                              //       child: SvgPicture.asset(
+                              //         'assets/images/filter.svg',
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                            ],),
+                          // child: CommonExpansion(
+                          //   OnSelection: (String value) {
+                          //     setState(() {
+                          //       isResetCombo = false;
+                          //       courseHintText = value;
+                          //       isSearchClicked = false;
+                          //     });
+                          //     store.dispatch(
+                          //       FilterRotationListByCourseList(
+                          //           active_status:
+                          //               commonTypeList[_selectedIndex].type,
+                          //           courseId: getCourseIdByName(value),
+                          //           searchText: ''),
+                          //     );
+                          //     getRotationListData();
+                          //   },
+                          //   bodyList: courseNameList,
+                          //   trailIcon: "",
+                          //   hintText: courseHintText,
+                          //   isReset: isResetCombo,
+                          //   decoration: BoxDecoration(
+                          //     color: Color(Hardcoded.textFieldBg),
+                          //     borderRadius: BorderRadius.circular(12),
+                          //     // border: Border.all(color: Colors.transparent),
+                          //     boxShadow: [
+                          //       BoxShadow(
+                          //         color: Colors.black12,
+                          //         offset: const Offset(
+                          //           0.0,
+                          //           5.0,
+                          //         ),
+                          //         blurRadius: 7.0,
+                          //         spreadRadius: 2.0,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+
+
                         ),
-                        // child: CommonExpansion(
-                        //   OnSelection: (String value) {
-                        //     setState(() {
-                        //       isResetCombo = false;
-                        //       courseHintText = value;
-                        //       isSearchClicked = false;
-                        //     });
-                        //     store.dispatch(
-                        //       FilterRotationListByCourseList(
-                        //           active_status:
-                        //               commonTypeList[_selectedIndex].type,
-                        //           courseId: getCourseIdByName(value),
-                        //           searchText: ''),
-                        //     );
-                        //     getRotationListData();
-                        //   },
-                        //   bodyList: courseNameList,
-                        //   trailIcon: "",
-                        //   hintText: courseHintText,
-                        //   isReset: isResetCombo,
-                        //   decoration: BoxDecoration(
-                        //     color: Color(Hardcoded.textFieldBg),
-                        //     borderRadius: BorderRadius.circular(12),
-                        //     // border: Border.all(color: Colors.transparent),
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //         color: Colors.black12,
-                        //         offset: const Offset(
-                        //           0.0,
-                        //           5.0,
-                        //         ),
-                        //         blurRadius: 7.0,
-                        //         spreadRadius: 2.0,
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                      ),
                       // Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       //   child: ExpansionWidget<RotationJournalData>(
@@ -485,7 +481,7 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
                       //                       overflow: TextOverflow.ellipsis,
                       //                       style: Theme.of(context)
                       //                           .textTheme
-                      //                           .titleLarge
+                      //                           .headline6
                       //                           ?.copyWith(
                       //                           fontWeight:
                       //                           FontWeight.w400,
@@ -539,14 +535,11 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
                     ].reversed.map((e) => e).toList())
                   : Column(children: [
                       common_green_rotation_card(
-                        date:
-                            "${DateFormat("dd").format(convertDateToUTC("${widget.rotationDetailListData!.startDate!}"))}",
+                        date:"${DateFormat("dd").format(convertDateToUTC("${widget.rotationDetailListData!.startDate!}"))}",
                         month:
-                            "${DateFormat("MMM").format(convertDateToUTC("${widget.rotationDetailListData!.startDate!}"))}",
-                        text1:
-                            "${widget.rotationDetailListData!.rotationName!}",
-                        text2:
-                            "${widget.rotationDetailListData!.hospitalName!}",
+                        "${DateFormat("MMM").format(convertDateToUTC("${widget.rotationDetailListData!.startDate!}"))}",
+                        text1: "${widget.rotationDetailListData!.rotationName!}",
+                        text2: "${widget.rotationDetailListData!.hospitalName!}",
                         text3: "${widget.rotationDetailListData!.courseName!}",
                         Index: 0,
                       ),
@@ -555,13 +548,13 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
                         child: listModule(),
                       ),
                     ])
-          //   : Center(
-          // child: Padding(
-          //     padding: EdgeInsets.only(bottom: globalHeight * 0.1),
-          //     child: NoDataFoundWidget(
-          //       title: "Daily Journals not available",
-          //       imagePath: "assets/no_data_found.png",
-          //     )),
+            //   : Center(
+            // child: Padding(
+            //     padding: EdgeInsets.only(bottom: globalHeight * 0.1),
+            //     child: NoDataFoundWidget(
+            //       title: "Daily Journals not available",
+            //       imagePath: "assets/no_data_found.png",
+            //     )),
           // ),
           ),
     );
@@ -569,9 +562,9 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
 
   Padding listModule() {
     return Padding(
-      padding: EdgeInsets.only(
-          top: widget.route == DailyJournalRoute.direct ? 130.0 : 0
-          // AppConsts.isFromDashboard == false ? 50.0 : 0
+      padding:
+      EdgeInsets.only(top: widget.route == DailyJournalRoute.direct ? 130.0 : 0
+      // AppConsts.isFromDashboard == false ? 50.0 : 0
           ),
       child: Visibility(
         visible: isSearchClicked == false && isDataLoaded && pageNo == 1,
@@ -586,10 +579,9 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
                       // width: double.infinity,
                       //height: 100,
                       child: Padding(
-                          padding: EdgeInsets.only(
-                              bottom: widget.route == DailyJournalRoute.direct
-                                  ? 0
-                                  : globalHeight * 0.02),
+                          padding: EdgeInsets.only(bottom:
+                               widget.route == DailyJournalRoute.direct ? 0 : globalHeight * 0.02
+                              ),
                           child: NoDataFoundWidget(
                             title: "No data found",
                             imagePath: "assets/no_data_found.png",
@@ -657,8 +649,7 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
                           return CommonListContainerWidget(
                             mainTitle: journalListData[index].rotationName,
                             subTitle1: "Journal date : ",
-                            title1:
-                                "${dateConvert("${journalListData[index].journalDate!}")}",
+                            title1: "${dateConvert("${journalListData[index].journalDate!}")}",
                             subTitle3: "Hospital site : ",
                             title3: journalListData[index].hospitalName,
                             subTitle4: "Course : ",
@@ -683,63 +674,50 @@ class _DailyJournalListScreenState extends State<DailyJournalListScreen> {
                                         !journalListData[index].schoolResponse!)
                                     ? "Edit"
                                     : "View",
-                            navigateButton:
-                                (!journalListData[index].clinicianResponse! &&
-                                        !journalListData[index].schoolResponse!)
-                                    ? () async {
-                                        // await Navigator.pushNamed(
-                                        //   context,
-                                        //   Routes.dailyJournalDetailsScreen,
-                                        //   arguments: DailyJournalData(
-                                        //       JournalId: Journallist[index].journalId,
-                                        //       rotationId: Journallist[index].rotationId,
-                                        //       hospitalTitle:
-                                        //           Journallist[index].hospitalName,
-                                        //       hospitalId:
-                                        //           Journallist[index].hospitalSiteId,
-                                        //       viewType: DailyJournalViewType.edit,
-                                        //       journalDecCount: journalDecCount),
-                                        // );
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EditDailyJournalScreen(
-                                                    journalListData:
-                                                        journalListData[index],
-                                                    journalId:
-                                                        journalListData[index]
-                                                            .journalId!,
-                                                    journalDecCount: journalData
-                                                        .journalDescriptionCount!,
-                                                  )),
-                                        );
-                                        setState(() {
-                                          pullToRefresh();
-                                        });
-                                      }
-                                    : () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewDailyJournalDetailScreen(
-                                                    journalListData:
-                                                        journalListData[index],
-                                                    journalId:
-                                                        journalListData[index]
-                                                            .journalId!,
-                                                  )),
-                                        );
-                                        // Navigator.pushNamed(
-                                        //   context,
-                                        //   Routes.dailyJournalDetailDataScreen,
-                                        //   arguments: DailyJournalDetailData(
-                                        //     JournalId: Journallist[index].journalId,
-                                        //     // viewType: DailyJournalViewType.view,
-                                        //   ),
-                                        // );
-                                      },
+                            navigateButton: (!journalListData[index]
+                                        .clinicianResponse! &&
+                                    !journalListData[index].schoolResponse!)
+                                ? () async {
+                                    // await Navigator.pushNamed(
+                                    //   context,
+                                    //   Routes.dailyJournalDetailsScreen,
+                                    //   arguments: DailyJournalData(
+                                    //       JournalId: Journallist[index].journalId,
+                                    //       rotationId: Journallist[index].rotationId,
+                                    //       hospitalTitle:
+                                    //           Journallist[index].hospitalName,
+                                    //       hospitalId:
+                                    //           Journallist[index].hospitalSiteId,
+                                    //       viewType: DailyJournalViewType.edit,
+                                    //       journalDecCount: journalDecCount),
+                                    // );
+                             await Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  EditDailyJournalScreen(
+                                  journalListData: journalListData[index],journalId:journalListData[index].journalId!,
+                                  journalDecCount: journalData.journalDescriptionCount!,
+                                )),
+                              );
+                                    setState(() {
+                                      pullToRefresh();
+                                    });
+                                  }
+                                : () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  ViewDailyJournalDetailScreen(
+                                  journalListData: journalListData[index],journalId:journalListData[index].journalId!,
+                                )),
+                              );
+                                    // Navigator.pushNamed(
+                                    //   context,
+                                    //   Routes.dailyJournalDetailDataScreen,
+                                    //   arguments: DailyJournalDetailData(
+                                    //     JournalId: Journallist[index].journalId,
+                                    //     // viewType: DailyJournalViewType.view,
+                                    //   ),
+                                    // );
+                                  },
                           );
                         }),
                   ),

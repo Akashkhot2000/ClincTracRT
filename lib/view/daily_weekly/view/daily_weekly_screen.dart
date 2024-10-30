@@ -91,11 +91,9 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
 
   Future<void> getdailyWeeklyList() async {
     if (pageNo == 1 || pageNo <= lastPage) {
-      if (mounted) {
-        setState(() {
-          isDataLoaded = true;
-        });
-      }
+      if(mounted) {setState(() {
+        isDataLoaded = true;
+      });}
       Box<UserLoginResponseHive>? box = Boxes.getUserInfo();
       CommonRequest dailyWeeklyRequest = CommonRequest(
           accessToken: box.get(Hardcoded.hiveBoxKey)!.accessToken,
@@ -114,17 +112,13 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
       lastPage =
           (int.parse(dailyWeeklyResponse.pager!.totalRecords!) / 10).ceil();
       if (dailyWeeklyResponse.pager!.totalRecords == '0') {
-        if (mounted) {
-          setState(() {
-            dataNotfound = true;
-          });
-        }
+        if(mounted) {setState(() {
+          dataNotfound = true;
+        });}
       } else {
-        if (mounted) {
-          setState(() {
-            dataNotfound = false;
-          });
-        }
+        if(mounted) { setState(() {
+          dataNotfound = false;
+        });}
       }
       setState(() {
         if (pageNo != 1) {
@@ -300,7 +294,7 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleLarge
+                                              .headline6
                                               ?.copyWith(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 14,
@@ -485,10 +479,9 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                           title10: dailyWeeklyList[index].avgTotal == ''
                               ? ""
                               : dailyWeeklyList[index].avgTotal,
-                          subTitle12:
-                              dailyWeeklyList[index].avgStudentPrep == ''
-                                  ? ''
-                                  : "Avg Student prep : ",
+                          subTitle12: dailyWeeklyList[index].avgStudentPrep == ''
+                              ? ''
+                              : "Avg Student prep : ",
                           title12: dailyWeeklyList[index].avgStudentPrep == ''
                               ? ""
                               : dailyWeeklyList[index].avgStudentPrep,
@@ -680,6 +673,7 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                 // );
                                 break;
                               case "1":
+
                                 Navigator.push(
                                   context,
                                   // MaterialPageRoute(builder: (context) => WebRedirectionScreen(url: 'https://rt.clinicaltrac.net/redirect/SkJZTnRvN3A=')),
@@ -687,7 +681,7 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                     builder: (context) =>
                                         // WebRedirectionScreen(url: webUrl, navigationRequestCallback: (NavigationRequest request) {if (request.url.contains('${cancel}')) {Navigator.pop(context);return NavigationDecision.prevent;} else if (request.url.contains('${save}')) {Navigator.pop(context);common_alert_pop(context, 'Evaluation Successfully\nSigned Off', 'assets/images/success_Icon.svg', () {Navigator.pop(context);});getdailyWeeklyList();return NavigationDecision.prevent;}return NavigationDecision.navigate;},)
                                         // WebRedirectionWithLoadingScreen(
-                                        WebRedirectionWithLoadingScreen(
+                                    WebRedirectionWithLoadingScreen(
                                       url: webUrl,
                                       // url: "https://formsmarts.com/html-form-example",
                                       screenTitle: "Daily/Weekly Signoff",
@@ -699,9 +693,9 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                                 context,
                                                 'Evaluation Successfully\nSigned Off',
                                                 'assets/images/success_Icon.svg',
-                                                () {
-                                              Navigator.pop(context);
-                                            });
+                                                    () {
+                                                  Navigator.pop(context);
+                                                });
                                           });
                                         });
 
@@ -724,14 +718,14 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                       },
                                       onError: () async {
                                         setState(() {
-                                          pullToRefresh().then((value) {
+                                          pullToRefresh()
+                                              .then((value) {
                                             common_alert_pop(
                                                 context,
-                                                '${"OOP's"}\nSomething went wrong',
-                                                'assets/images/error_Icon.svg',
-                                                () {
-                                              Navigator.pop(context);
-                                            });
+                                                '${"OOP's"}\nSomething went wrong', 'assets/images/error_Icon.svg',
+                                                    () {
+                                                  Navigator.pop(context);
+                                                });
                                           });
                                         });
                                       },
@@ -747,7 +741,7 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           // WebRedirectionScreen(url: webUrl, navigationRequestCallback: (NavigationRequest request) {if (request.url.contains('${cancel}')) {Navigator.pop(context);return NavigationDecision.prevent;}return NavigationDecision.navigate;},)
-                                          WebRedirectionWithLoadingScreen(
+                                      WebRedirectionWithLoadingScreen(
                                             url: webUrl,
                                             screenTitle: "Daily/Weekly View",
                                             onSuccess: () async {
@@ -756,7 +750,7 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                                 pullToRefresh();
                                               });
                                             },
-                                            onFail: () async {
+                                            onFail: () async{
                                               setState(() {
                                                 getdailyWeeklyList();
                                                 pullToRefresh();
@@ -768,11 +762,10 @@ class _dailyWeeklyScreenState extends State<dailyWeeklyScreen> {
                                                 pullToRefresh().then((value) {
                                                   common_alert_pop(
                                                       context,
-                                                      '${"OOP's"}\nSomething went wrong',
-                                                      'assets/images/error_Icon.svg',
-                                                      () {
-                                                    Navigator.pop(context);
-                                                  });
+                                                      '${"OOP's"}\nSomething went wrong', 'assets/images/error_Icon.svg',
+                                                          () {
+                                                        Navigator.pop(context);
+                                                      });
                                                 });
                                               });
                                             },

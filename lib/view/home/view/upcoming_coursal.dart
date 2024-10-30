@@ -51,7 +51,7 @@ class _UpcominCoursalBoxState extends State<UpcominCoursalBox> {
   List<Widget> upcominCards = <Widget>[];
 
   // List<ActiveRotationListModel> upcominCards = <ActiveRotationListModel>[];
-  // CarouselController carouselController = CarouselController();
+  CarouselController carouselController = CarouselController();
 
   Position? objPosition;
 
@@ -882,7 +882,7 @@ class _UpcominCoursalBoxState extends State<UpcominCoursalBox> {
                                 ),
                               );
                             },
-                            // carouselController: carouselController,
+                            carouselController: carouselController,
                             options: CarouselOptions(
                               enableInfiniteScroll: false,
                               viewportFraction: 1,

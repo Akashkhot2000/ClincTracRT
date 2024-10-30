@@ -286,26 +286,20 @@ class _AddDailyWeeklyScreenState extends State<AddDailyWeeklyScreen> {
                               if (EvaulationDateText.text.isNotEmpty &&
                                   phoneNmber.text.isNotEmpty &&
                                   phoneNmber.text.length == 12) {
-                                Box<UserLoginResponseHive>? box =
-                                    Boxes.getUserInfo();
+                                Box<UserLoginResponseHive>? box = Boxes.getUserInfo();
                                 AddCommonEvaluationRequest request =
                                     AddCommonEvaluationRequest(
                                   EvaluationDate: EvaluationDate.toString(),
-                                  accessToken: box
-                                      .get(Hardcoded.hiveBoxKey)!
-                                      .accessToken,
+                                  accessToken:
+                                       box.get(Hardcoded.hiveBoxKey)!.accessToken,
                                   MobileNumber: phoneNmber.text,
-                                  RotationId: selectedRotationId.isEmpty
-                                      ? widget.rotationId
-                                      : selectedRotationId,
+                                  RotationId: selectedRotationId.isEmpty ? widget.rotationId:selectedRotationId,
                                   SignatureName: widget.userLoginResponse.data
                                           .loggedUserFirstName +
                                       " " +
                                       widget.userLoginResponse.data
                                           .loggedUserLastName,
-                                  userId: box
-                                      .get(Hardcoded.hiveBoxKey)!
-                                      .loggedUserId,
+                                  userId: box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
                                 );
                                 final DataService dataService = locator();
 
@@ -342,10 +336,7 @@ class _AddDailyWeeklyScreenState extends State<AddDailyWeeklyScreen> {
                                 Future.delayed(Duration(seconds: 2), () {
                                   create.reset();
                                 });
-                                if (widget.Viewtype ==
-                                    DailyJournalViewType
-                                        .addDash) if (rotationText
-                                    .text.isEmpty) {
+                                if(widget.Viewtype == DailyJournalViewType.addDash)if (rotationText.text.isEmpty) {
                                   AppHelper.buildErrorSnackbar(
                                       context, "Please select rotation");
                                   return false;
@@ -380,71 +371,56 @@ class _AddDailyWeeklyScreenState extends State<AddDailyWeeklyScreen> {
                         children: [
                           ExpansionWidget<RotationForEvalListData>(
                               inputText: "Rotation",
-                              hintText: selectedRotation.toString().isNotEmpty
-                                  ? selectedRotation.toString()
-                                  : "Select rotation",
-                              textColor: selectedRotation.toString().isNotEmpty
-                                  ? Colors.black
-                                  : Color(Hardcoded.greyText),
+                              hintText:selectedRotation.toString().isNotEmpty ? selectedRotation.toString() : "Select rotation",
+                              textColor: selectedRotation.toString().isNotEmpty ? Colors.black: Color(Hardcoded.greyText),
                               OnSelection: (value) {
                                 setState(() {
                                   // setValue();
                                   RotationForEvalListData c =
-                                      value as RotationForEvalListData;
+                                  value as RotationForEvalListData;
                                   selectedRotationValue = c;
-                                  selectedRotation =
-                                      selectedRotationValue.title!;
-                                  selectedRotationId =
-                                      selectedRotationValue.rotationId!;
+                                  selectedRotation = selectedRotationValue.title!;
+                                  selectedRotationId = selectedRotationValue.rotationId!;
+
                                 });
                                 // log("id---------${selectedRotationValue.rotationId}");
                               },
-                              items: List.of(rotationEvalList.map((item) {
-                                String text = item.title.toString();
-                                List<String> title = text.split("(");
-                                String subText = title[1];
-                                List<String> subTitle = subText.split(")");
-                                return DropdownItem<RotationForEvalListData>(
-                                  value: item,
-                                  child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 8.0,
-                                          left: globalWidth * 0.06,
-                                          right: globalWidth * 0.06,
-                                          bottom: 8.0),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              title[0],
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyMedium!
-                                                  .copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                    color: Colors.black,
-                                                  ),
-                                            ),
-                                            Text(subTitle[0],
-                                                // widget.hintText,
+                              items: List.of(rotationEvalList.map(
+                                      (item) {
+                                    String text = item.title.toString();
+                                    List<String> title = text.split("(");
+                                    String subText = title[1];
+                                    List<String> subTitle = subText.split(")");
+                                    return DropdownItem<RotationForEvalListData>(
+                                      value: item,
+                                      child: Padding(
+                                          padding: EdgeInsets.only(top: 8.0,left: globalWidth * 0.06,right: globalWidth * 0.06,bottom: 8.0),
+                                          child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [Text(title[0],
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .titleLarge
-                                                    ?.copyWith(
-                                                        fontWeight:
-                                                            FontWeight.w400,
+                                                    .bodyMedium!
+                                                    .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                                Text( subTitle[0],
+                                                    // widget.hintText,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                                                        fontWeight: FontWeight.w400,
                                                         fontSize: 14,
-                                                        color: Color(Hardcoded
-                                                            .greyText))),
-                                          ])),
-                                );
-                              }))),
+                                                        color: Color(Hardcoded.greyText))),
+                                              ])
+                                      ),
+                                    );}
+                              ))),
                           // Expansion(
                           //   OnSelection: (String value) {
                           //     setState(() {

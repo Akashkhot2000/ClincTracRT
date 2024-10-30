@@ -8,7 +8,7 @@ import 'package:ios_keyboard_action/ios_keyboard_action.dart';
 /// [Expansion] is a custom Expansion tile card created for faq section due to its uniqueness in design
 class Expansion extends StatefulWidget {
   /// Constructor for [Expansion]
-  Expansion({
+   Expansion({
     Key? key,
     required this.bodyList,
     required this.trailIcon,
@@ -23,7 +23,7 @@ class Expansion extends StatefulWidget {
     this.isSubString = false,
     this.onSearchTap,
     this.image,
-    this.searchWidget,
+     this.searchWidget,
 
     ///this.leadingImage = false,
     //required this.leadingImagePath,
@@ -103,21 +103,16 @@ class _ExpansionState extends State<Expansion> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          widget.inputText == null
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.only(left: 3, bottom: 3),
-                  child: Text(
-                    "${widget.inputText}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                  ),
-                ),
+          widget.inputText == null ? Container():   Padding(padding: const EdgeInsets.only(
+            left: 3,bottom: 3
+          ),child:Text(
+           "${widget.inputText}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Colors.black,),),),
           ExpansionTileCard(
             key: expansionTile,
             enabled: widget.enabled,
@@ -149,21 +144,22 @@ class _ExpansionState extends State<Expansion> {
                 initialExpandState = value;
               });
             },
-            title: Text(
-                widget.isReset == false
-                    ? selectedValue
-                    : widget.bodyList.elementAt(0),
-                // widget.hintText,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                    color: widget.textColor)
-                // : Theme.of(context)
-                //     .textTheme
-                //     .titleLarge
-                //     ?.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
+            title:
+                Text(
+                  widget.isReset == false
+                      ? selectedValue
+                      : widget.bodyList.elementAt(0),
+                  // widget.hintText,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headline6?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: widget.textColor)
+                      // : Theme.of(context)
+                      //     .textTheme
+                      //     .headline6
+                      //     ?.copyWith(fontWeight: FontWeight.w500, fontSize: 14),
                 ),
             //    subtitle:  widget.isSearch! == true && initialExpandState == true ? Visibility(
             //       visible: initialExpandState,
@@ -181,110 +177,105 @@ class _ExpansionState extends State<Expansion> {
             //
             // ): null,
             children: <Widget>[
-              widget.isSearch! == true && initialExpandState == true
-                  ? Visibility(
-                      visible: initialExpandState,
-                      child: Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          // child: TextFormField(
-                          //   initialValue: "search",
-                          // )
-                          child: widget.searchWidget),
-                    )
-                  : Container(),
+              widget.isSearch! == true && initialExpandState == true ? Visibility(
+                visible: initialExpandState,
+                child:
+
+                Padding(
+                    padding: EdgeInsets.only(top: 0
+                    ),
+                    // child: TextFormField(
+                    //   initialValue: "search",
+                    // )
+                    child: widget.searchWidget
+                ),
+
+              ): Container(),
               // Children list for expansion
               ClipRRect(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(12.0),
                   bottomRight: Radius.circular(12.0),
                 ), //circular(20.0),
-                child: Container(
-                  height: widget.bodyList.length == 1
-                      ? 58
-                      : widget.bodyList.length == 2
-                          ? 128
-                          : 200,
-                  // height: widget.bodyList.length == 1 ? 58:widget.bodyList.length == 2 ? 128 : 200,
-                  child: Scrollbar(
-                    // backgroundColor: Colors.red,
-                    controller: _customController,
-                    child: ListView.builder(
-                        controller: _customController,
-                        itemCount: widget.bodyList.length,
-                        itemBuilder: (context, index) {
-                          String text = widget.bodyList.elementAt(index);
-                          List<String> title = text.split("(");
-                          String subText = title[0].toString();
-                          List<String> subTitle = subText.split(")");
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: index == widget.bodyList.length - 1
-                                    ? const Radius.circular(12)
-                                    : Radius.zero,
-                                bottomRight: index == widget.bodyList.length - 1
-                                    ? const Radius.circular(12)
-                                    : Radius.zero,
+                child:
+    Container(
+    height: widget.bodyList.length == 1 ? 58:widget.bodyList.length == 2 ? 128 : 200,
+    // height: widget.bodyList.length == 1 ? 58:widget.bodyList.length == 2 ? 128 : 200,
+                        child:
+                        Scrollbar(
+                          // backgroundColor: Colors.red,
+                          controller: _customController,
+                          child: ListView.builder(
+                            controller: _customController,
+                            itemCount: widget.bodyList.length,
+                            itemBuilder: (context, index){
+                              String text = widget.bodyList.elementAt(index);
+                              List<String> title = text.split("(");
+                              String subText = title[0].toString();
+                              List<String> subTitle = subText.split(")");
+                              return Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: index == widget.bodyList.length - 1
+                                      ? const Radius.circular(12)
+                                      : Radius.zero,
+                                  bottomRight: index == widget.bodyList.length - 1
+                                      ? const Radius.circular(12)
+                                      : Radius.zero,
+                                ),
                               ),
-                            ),
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {
-                                expansionTile.currentState!.collapse();
-                                setState(
-                                  () {
-                                    if (initialExpandState) {
-                                      initialExpandState = false;
-                                    } else {
-                                      initialExpandState = true;
-                                    }
-                                    selectedValue =
-                                        widget.bodyList.elementAt(index);
-                                  },
-                                );
-                                widget.OnSelection!(
-                                    widget.bodyList.elementAt(index));
-                              },
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(
-                                      widget.isSubString == true
-                                          ? title[0]
-                                          : widget.bodyList.elementAt(index),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  expansionTile.currentState!.collapse();
+                                  setState(
+                                    () {
+                                      if (initialExpandState) {
+                                        initialExpandState = false;
+                                      } else {
+                                        initialExpandState = true;
+                                      }
+                                      selectedValue =
+                                          widget.bodyList.elementAt(index);
+                                    },
+                                  );
+                                  widget
+                                      .OnSelection!(widget.bodyList.elementAt(index));
+                                },
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(
+                                       widget.isSubString == true ? title[0] : widget.bodyList.elementAt(index),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                        ),
                                       ),
+                                      subtitle: widget.isSubString == true ?  Text(
+                                        subTitle[0],
+                                        // widget.hintText,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Theme.of(context).textTheme.headline6?.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+    color: Color(Hardcoded.greyText)
+                                        ),
+                                      ): null,
                                     ),
-                                    subtitle: widget.isSubString == true
-                                        ? Text(
-                                            subTitle[0],
-                                            // widget.hintText,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge
-                                                ?.copyWith(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                    color: Color(
-                                                        Hardcoded.greyText)),
-                                          )
-                                        : null,
-                                  ),
-                                  if (index != widget.bodyList.length - 1)
-                                    const Divider()
-                                ],
+                                    if (index != widget.bodyList.length - 1)
+                                      const Divider()
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        }),
-                  ),
-                ),
+                            );}
+                          ),
+                        ),
+                      ),
+
               ),
             ],
           ),

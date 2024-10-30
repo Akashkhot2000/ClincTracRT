@@ -120,17 +120,17 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
     Box<UserLoginResponseHive>? box = Boxes.getUserInfo();
     final DataService dataService = locator();
     final DataResponseModel dataResponseModel =
-        await dataService.getDrInterations(
-            box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-            box.get(Hardcoded.hiveBoxKey)!.accessToken,
-            pageno.toString(),
-            searchEditingController.text,
-            widget.rotation.rotationId.isEmpty
-                ? selectedRotationId
-                : widget.rotation.rotationId);
+    await dataService.getDrInterations(
+        box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+        box.get(Hardcoded.hiveBoxKey)!.accessToken,
+        pageno.toString(),
+        searchEditingController.text,
+        widget.rotation.rotationId.isEmpty
+            ? selectedRotationId
+            : widget.rotation.rotationId);
 
     StudentDrInteractionData studentDrInteractionData =
-        StudentDrInteractionData.fromJson(dataResponseModel.data);
+    StudentDrInteractionData.fromJson(dataResponseModel.data);
     if (studentDrInteractionData.pager.totalRecords == '0') {
       if (dataResponseModel.data.isNotEmpty) {
         if (mounted) {
@@ -155,8 +155,8 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
               studentDrInteractionData.data.interactionList;
         else {
           for (int i = 0;
-              i < studentDrInteractionData.data.interactionList.length;
-              i++) {
+          i < studentDrInteractionData.data.interactionList.length;
+          i++) {
             localDrInteractionList
                 .add(studentDrInteractionData.data.interactionList[i]);
           }
@@ -238,10 +238,9 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
     return WillPopScope(
       onWillPop: () {
         widget.showAdd
-            ? Navigator.pop(context)
-            : Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
-                arguments: BodySwitcherData(
-                    initialPage: Bottom_navigation_control.home));
+            ?  Navigator.pop(context):Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
+              arguments: BodySwitcherData(
+                  initialPage: Bottom_navigation_control.home));
         store.dispatch(getDrInteractions(
             searchText: '', rotationId: widget.rotation.rotationId, page: 1));
         return Future.value(true);
@@ -334,10 +333,9 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
                 page: 1));
 
             widget.showAdd
-                ? Navigator.pop(context)
-                : Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
-                    arguments: BodySwitcherData(
-                        initialPage: Bottom_navigation_control.home));
+                ?  Navigator.pop(context): Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
+                  arguments: BodySwitcherData(
+                      initialPage: Bottom_navigation_control.home));
           },
         ),
         body: widget.showAdd
@@ -428,7 +426,7 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
                                             overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .titleLarge
+                                                .headline6
                                                 ?.copyWith(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 14,
@@ -508,8 +506,8 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 2, right: 2.0),
-                    child: CupertinoScrollbar(
-                      controller: scrollController,
+                    child:CupertinoScrollbar(
+                    controller: scrollController,
                       child: ListView.builder(
                         controller: scrollController,
                         itemCount: localDrInteractionList.length,
@@ -650,8 +648,8 @@ class _DrInteractionListScreenState extends State<DrInteractionListScreen> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 2, right: 2.0),
-                    child: CupertinoScrollbar(
-                      controller: scrollController,
+                    child:CupertinoScrollbar(
+                    controller: scrollController,
                       child: ListView.builder(
                           controller: scrollController,
                           itemCount: localDrInteractionList.length,

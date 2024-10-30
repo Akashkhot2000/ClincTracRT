@@ -357,7 +357,7 @@ class _AddMidtermScreenState extends State<AddMidtermScreen> {
                                               overflow: TextOverflow.ellipsis,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .titleLarge
+                                                  .headline6
                                                   ?.copyWith(
                                                       fontWeight:
                                                           FontWeight.w400,

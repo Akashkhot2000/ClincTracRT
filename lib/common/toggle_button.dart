@@ -74,7 +74,7 @@ class _WhatsAppToggleButtonState extends State<ToggleButton> {
                   padding: const EdgeInsets.all(3),
                   child: Text(
                     widget.values[index],
-                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                    style: Theme.of(context).textTheme.overline!.copyWith(
                           fontWeight: FontWeight.w600,
                           color: initialPosition
                               ? Color(Hardcoded.white)

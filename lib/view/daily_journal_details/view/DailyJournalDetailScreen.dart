@@ -710,7 +710,7 @@ class _DailyJournalDetailsScreenState extends State<DailyJournalDetailsScreen> {
                                         overflow: TextOverflow.ellipsis,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleLarge
+                                            .headline6
                                             ?.copyWith(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 14,

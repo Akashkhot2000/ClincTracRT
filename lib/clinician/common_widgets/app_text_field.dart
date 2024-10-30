@@ -3,6 +3,7 @@ import 'package:clinicaltrac/common/hardcoded.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+
 /// This is search text field class.
 class AppTextField extends StatefulWidget {
   final DropDown dropDown;
@@ -38,16 +39,15 @@ class _AppTextFieldState extends State<AppTextField> {
         },
         decoration: InputDecoration(
           filled: true,
-          fillColor: Color(Hardcoded.textFieldBgDisabled),
+          fillColor:Color(Hardcoded.textFieldBgDisabled),
           contentPadding:
-              const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
+          const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
           hintText: widget.searchHintText,
-          hintStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: widget.searchHintText != "Search"
-                  ? Colors.black
-                  : Color(Hardcoded.greyText)),
+          hintStyle: Theme.of(context).textTheme.headline6?.copyWith(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: widget.searchHintText !="Search" ? Colors.black:Color(Hardcoded.greyText)
+        ),
           border: const OutlineInputBorder(
             borderSide: BorderSide(
               width: 0,
@@ -77,4 +77,5 @@ class _AppTextFieldState extends State<AppTextField> {
       ),
     );
   }
+
 }

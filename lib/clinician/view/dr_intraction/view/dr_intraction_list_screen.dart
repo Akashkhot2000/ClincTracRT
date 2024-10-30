@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+
 import 'package:clinicaltrac/api/data_locator.dart';
 import 'package:clinicaltrac/api/data_service.dart';
 import 'package:clinicaltrac/clinician/common_widgets/uni_dr_interaction_container.dart';
@@ -36,17 +37,19 @@ import 'package:ios_keyboard_action/ios_keyboard_action.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class DrInteractionNewListScreen extends StatefulWidget {
-  UniDrInteractionListScreenVM drInteractionListScreenVM;
-  DrInteractionNewListScreen(
-      {super.key, required this.drInteractionListScreenVM});
+
+  UniDrInteractionListScreenVM drInteractionListScreenVM ;
+   DrInteractionNewListScreen(
+      {super.key,
+      required this.drInteractionListScreenVM});
+
 
   @override
   State<DrInteractionNewListScreen> createState() =>
       _DrInteractionNewListScreenState();
 }
 
-class _DrInteractionNewListScreenState
-    extends State<DrInteractionNewListScreen> {
+class _DrInteractionNewListScreenState extends State<DrInteractionNewListScreen> {
   bool isExpanded = true;
 
   bool isSearchClicked = false;
@@ -76,15 +79,17 @@ class _DrInteractionNewListScreenState
 
   @override
   void initState() {
+
     scrollController.addListener(pagination);
     // store.dispatch(getStudentJournalRotationlistAction());
     addNewInteractionAsPerPageChange();
     super.initState();
-    getRotationList();
+  getRotationList();
   }
 
   @override
   void didUpdateWidget(DrInteractionNewListScreen oldWidget) {
+
     addNewInteractionAsPerPageChange();
     super.didUpdateWidget(oldWidget);
   }
@@ -104,16 +109,13 @@ class _DrInteractionNewListScreenState
     final DataService dataService = locator();
     final DataResponseModel dataResponseModel =
         await dataService.getDrInterationsList(
-      box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-      box.get(Hardcoded.hiveBoxKey)!.accessToken,
-      pageno.toString(),
-      searchEditingController.text,
-      widget.drInteractionListScreenVM.rotation == null ||
-              widget.drInteractionListScreenVM.rotation!.rotationId.isEmpty
-          ? selectedRotationId
-          : widget.drInteractionListScreenVM.rotation!.rotationId,
-      box.get(Hardcoded.hiveBoxKey)!.loggedUserType == "Student" ? "0" : "1",
-    );
+             box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+          box.get(Hardcoded.hiveBoxKey)!.accessToken,
+            pageno.toString(),
+            searchEditingController.text,
+          widget.drInteractionListScreenVM.rotation==null || widget.drInteractionListScreenVM.rotation!.rotationId.isEmpty
+                ? selectedRotationId
+                : widget.drInteractionListScreenVM.rotation!.rotationId,box.get(Hardcoded.hiveBoxKey)!.loggedUserType == "Student" ? "0" : "1",);
 
     // if (dataResponseModel.success) {
     //   if (dataResponseModel.data.isNotEmpty) {
@@ -124,14 +126,12 @@ class _DrInteractionNewListScreenState
     //     }
     //     log(dataResponseModel.data.toString());
 
-    ClinicianDrInteractionPayload studentDrInteractionData =
-        ClinicianDrInteractionPayload.fromJson(dataResponseModel.data);
-    if (studentDrInteractionData.pager != null &&
-        studentDrInteractionData.pager!.totalRecords == '0') {
+    ClinicianDrInteractionPayload studentDrInteractionData = ClinicianDrInteractionPayload.fromJson(dataResponseModel.data);
+    if (studentDrInteractionData.pager!=null && studentDrInteractionData.pager!.totalRecords == '0') {
       if (dataResponseModel.data.isNotEmpty) {
-        setState(() {
-          datanotFound = true;
-        });
+      setState(() {
+        datanotFound = true;
+      });
       }
     } else {
       setState(() {
@@ -143,22 +143,17 @@ class _DrInteractionNewListScreenState
     // localDrInteractionList.data.addAll(drInteractionList.data);
 
     // log(localDrInteractionList.data.length.toString() + "new data after adding");
-    setState(() {
-      interactionDecCount =
-          studentDrInteractionData.data!.interactionDescriptionCount ?? "0";
-      if (pageno == 1)
-        localDrInteractionList =
-            studentDrInteractionData.data!.interactionList ?? [];
-      else {
-        for (int i = 0;
-            i < studentDrInteractionData.data!.interactionList!.length;
-            i++) {
-          localDrInteractionList
-              .add(studentDrInteractionData.data!.interactionList![i]);
+      setState(() {
+        interactionDecCount = studentDrInteractionData.data!.interactionDescriptionCount??"0";
+        if (pageno == 1)
+          localDrInteractionList = studentDrInteractionData.data!.interactionList??[];
+        else {
+          for (int i = 0; i < studentDrInteractionData.data!.interactionList!.length; i++) {
+            localDrInteractionList.add(studentDrInteractionData.data!.interactionList![i]);
+          }
         }
-      }
-      isDataLoading = false;
-    });
+        isDataLoading = false;
+      });
     //   } else {}
     // } else {}
   }
@@ -178,6 +173,8 @@ class _DrInteractionNewListScreenState
     searchEditingController.text = '';
     isSearchClicked = false;
   }
+
+
 
   String getMonthString(int monthInInt) {
     switch (monthInInt) {
@@ -234,9 +231,7 @@ class _DrInteractionNewListScreenState
     return WillPopScope(
       onWillPop: () {
         store.dispatch(getDrInteractions(
-            searchText: '',
-            rotationId: widget.drInteractionListScreenVM.rotation!.rotationId,
-            page: 1));
+            searchText: '', rotationId: widget.drInteractionListScreenVM.rotation!.rotationId, page: 1));
         return Future.value(true);
       },
       child: Scaffold(
@@ -297,12 +292,11 @@ class _DrInteractionNewListScreenState
               if (isSearchClicked) {
                 // log("1111111111");
                 store.dispatch(getDrInteractions(
-                  searchText: '',
-                  rotationId: widget.drInteractionListScreenVM.rotation!
-                          .rotationId.isEmpty
-                      ? selectedRotationId
-                      : widget.drInteractionListScreenVM.rotation!.rotationId,
-                  // page: 1
+                    searchText: '',
+                    rotationId: widget.drInteractionListScreenVM.rotation!.rotationId.isEmpty
+                        ? selectedRotationId
+                        : widget.drInteractionListScreenVM.rotation!.rotationId,
+                    // page: 1
                 ));
               }
               pageno = 1;
@@ -318,7 +312,7 @@ class _DrInteractionNewListScreenState
                   ),
                   child: Material(
                     color: Colors.white,
-                    child: IOSKeyboardAction(
+                    child:  IOSKeyboardAction(
                       label: 'DONE',
                       focusNode: searchFocusNode,
                       focusActionType: FocusActionType.done,
@@ -330,11 +324,9 @@ class _DrInteractionNewListScreenState
                         onChanged: (value) {
                           store.dispatch(getDrInteractions(
                               searchText: value,
-                              rotationId: widget.drInteractionListScreenVM
-                                      .rotation!.rotationId.isEmpty
+                              rotationId: widget.drInteractionListScreenVM.rotation!.rotationId.isEmpty
                                   ? selectedRotationId
-                                  : widget.drInteractionListScreenVM.rotation!
-                                      .rotationId,
+                                  : widget.drInteractionListScreenVM.rotation!.rotationId,
                               page: pageno));
                         },
                       ),
@@ -350,16 +342,15 @@ class _DrInteractionNewListScreenState
           searchEnabeled: true,
           image: !isSearchClicked
               ? SvgPicture.asset(
-                  'assets/images/search.svg',
+              'assets/images/search.svg',
                 )
               : SvgPicture.asset(
-                  'assets/images/closeicon.svg',
-                ),
+          'assets/images/closeicon.svg',
+        ),
           onTap: () {
             store.dispatch(getDrInteractions(
                 searchText: '',
-                rotationId:
-                    widget.drInteractionListScreenVM.rotation!.rotationId,
+                rotationId: widget.drInteractionListScreenVM.rotation!.rotationId,
                 page: 1));
             Navigator.pop(context);
           },
@@ -368,16 +359,12 @@ class _DrInteractionNewListScreenState
             ? Column(
                 children: [
                   common_green_rotation_card(
-                    date:
-                        '${widget.drInteractionListScreenVM.rotation!.startDate.day}',
+                    date: '${widget.drInteractionListScreenVM.rotation!.startDate.day}',
                     month:
                         "${Hardcoded.getMonthString(widget.drInteractionListScreenVM.rotation!.startDate.month)}",
-                    text1:
-                        "${widget.drInteractionListScreenVM.rotation!.rotationTitle}",
-                    text2:
-                        "${widget.drInteractionListScreenVM.rotation!.hospitalTitle}",
-                    text3:
-                        "${widget.drInteractionListScreenVM.rotation!.courseTitle}",
+                    text1: "${widget.drInteractionListScreenVM.rotation!.rotationTitle}",
+                    text2: "${widget.drInteractionListScreenVM.rotation!.hospitalTitle}",
+                    text3: "${widget.drInteractionListScreenVM.rotation!.courseTitle}",
                     Index: 0,
                   ),
                   Expanded(
@@ -391,26 +378,21 @@ class _DrInteractionNewListScreenState
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
                     child: ExpansionWidget<UniRotationJournalData>(
-                      hintText:
-                          selectedRotationValue.title != "All" ? "All" : '',
+                      hintText: selectedRotationValue.title != "All" ? "All" : '',
                       // enabled: selectAllCourseTopic.toString().isEmpty
                       //     ? true
                       //     : false,
                       textColor: Colors.black,
                       OnSelection: (value) {
                         setState(() {
-                          UniRotationJournalData c =
-                              value as UniRotationJournalData;
+                          UniRotationJournalData c = value as UniRotationJournalData;
                           selectedRotationValue = c;
                           // singleCourseTopicList.clear();
-                          selectedRotationId =
-                              selectedRotationValue.rotationId.toString();
-                          selectedRotation =
-                              selectedRotationValue.title.toString();
+                          selectedRotationId = selectedRotationValue.rotationId.toString();
+                          selectedRotation = selectedRotationValue.title.toString();
                           store.dispatch(getDrInteractions(
                               searchText: '',
-                              rotationId:
-                                  selectedRotationValue.rotationId.toString(),
+                              rotationId: selectedRotationValue.rotationId.toString(),
                               page: pageno));
 
                           pageno = 1;
@@ -445,24 +427,24 @@ class _DrInteractionNewListScreenState
                                           .textTheme
                                           .bodyMedium!
                                           .copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          ),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                     subTitle[0] != "All" && title[0] != "All"
                                         ? Text(subTitle[0],
-                                            // widget.hintText,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge
-                                                ?.copyWith(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                    color: Color(
-                                                        Hardcoded.greyText)))
+                                        // widget.hintText,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6
+                                            ?.copyWith(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14,
+                                            color:
+                                            Color(Hardcoded.greyText)))
                                         : Container(),
                                   ])),
                         );
@@ -519,7 +501,7 @@ class _DrInteractionNewListScreenState
           visible: isSearchClicked == false && isDataLoading && pageno == 1,
           child: common_loader(),
           replacement: Visibility(
-            visible: localDrInteractionList.isEmpty,
+            visible:localDrInteractionList.isEmpty,
             child: isSearchClicked
                 ? Center(
                     child: Padding(
@@ -548,96 +530,94 @@ class _DrInteractionNewListScreenState
                 onRefresh: () => pullToRefresh(),
                 color: Color(0xFFBBBBC6),
                 // child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Color.fromARGB(24, 203, 204, 208),
-                        blurRadius: 35.0, // soften the shadow
-                        spreadRadius: 10.0, //extend the shadow
-                        offset: Offset(
-                          15.0,
-                          15.0,
-                        ),
-                      )
-                    ],
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Color.fromARGB(24, 203, 204, 208),
+                          blurRadius: 35.0, // soften the shadow
+                          spreadRadius: 10.0, //extend the shadow
+                          offset: Offset(
+                            15.0,
+                            15.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: localDrInteractionList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(child: Text("sss"),);
+          //                 return DrInteractionContainer(
+          //                     // onTap: () {
+          //                     //   setState(() {});
+          //                     //   Navigator.pushNamed(
+          //                     //     context,
+          //                     //     Routes.addDrInteractionScreen,
+          //                     //     arguments: AddViewDrIntgeractionData(
+          //                     //         rotationId: widget.drIntraction.rotationId,
+          //                     //         rotationTitle:
+          //                     //             widget.drIntraction.rotationName,
+          //                     //         drIntractionAction: DrIntractionAction.edit,
+          //                     //         drIntraction: widget.drIntraction,
+          //                     //         isFromDashboard: widget.isFromDashboard),
+          //                     //   );
+          //                     //   addNewInteractionAsPerPageChange();
+          //                     // },
+          //                     color: initialColor
+          //                         .elementAt(index % initialColor.length),
+          //                     drIntraction:
+          //                         localDrInteractionList.elementAt(index),
+          //                   isFromDashboard: !widget.showAdd!,
+          //                     interactionDecCount: interactionDecCount,
+          //                     // pullToRefresh: addNewInteractionAsPerPageChange,
+          //                     pullToRefresh: pullToRefresh,
+          //                     onTapDelete: () {
+          //                       common_popup_widget(
+          //                           context,
+          //                           'Do you want to delete Dr. Interaction?',
+          //                           'assets/images/deleteicon.svg', () async {
+          //                         // Navigator.pop(context);
+          //                         final DataService dataService = locator();
+          //                         final DataResponseModel dataResponseModel =
+          //                             await dataService.deleteData(
+          //                           localDrInteractionList
+          //                               .elementAt(index)
+          //                               .interactionId,
+          //                          box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+          // box.get(Hardcoded.hiveBoxKey)!.accessToken,
+          //                           "interaction | attendance | incident | volunteerEval",
+          //                           "interaction",
+          //                         );
+          //                         // log("${dataResponseModel.success}");
+          //                         if (dataResponseModel.success) {
+          //                           delete.success();
+          //                           Future.delayed(const Duration(seconds: 3),
+          //                               () {
+          //                             Navigator.pop(context);
+          //                             AppHelper.buildErrorSnackbar(context,
+          //                                 "Dr. Interaction deleted successfully");
+          //                             store.dispatch(getDrInteractions(
+          //                                 searchText: '',
+          //                                 rotationId:
+          //                                     widget.rotation!.rotationId.isEmpty
+          //                                         ? selectedRotationId
+          //                                         : widget.rotation!.rotationId,
+          //                                 page: 1));
+          //                           });
+          //                         } else {
+          //                           delete.error();
+          //                           Future.delayed(const Duration(seconds: 3),
+          //                               () {
+          //                             delete.reset();
+          //                           });
+          //                         }
+          //                       });
+          //                     });
+                        }),
                   ),
-                  child: ListView.builder(
-                      controller: scrollController,
-                      itemCount: localDrInteractionList.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          child: Text("sss"),
-                        );
-                        //                 return DrInteractionContainer(
-                        //                     // onTap: () {
-                        //                     //   setState(() {});
-                        //                     //   Navigator.pushNamed(
-                        //                     //     context,
-                        //                     //     Routes.addDrInteractionScreen,
-                        //                     //     arguments: AddViewDrIntgeractionData(
-                        //                     //         rotationId: widget.drIntraction.rotationId,
-                        //                     //         rotationTitle:
-                        //                     //             widget.drIntraction.rotationName,
-                        //                     //         drIntractionAction: DrIntractionAction.edit,
-                        //                     //         drIntraction: widget.drIntraction,
-                        //                     //         isFromDashboard: widget.isFromDashboard),
-                        //                     //   );
-                        //                     //   addNewInteractionAsPerPageChange();
-                        //                     // },
-                        //                     color: initialColor
-                        //                         .elementAt(index % initialColor.length),
-                        //                     drIntraction:
-                        //                         localDrInteractionList.elementAt(index),
-                        //                   isFromDashboard: !widget.showAdd!,
-                        //                     interactionDecCount: interactionDecCount,
-                        //                     // pullToRefresh: addNewInteractionAsPerPageChange,
-                        //                     pullToRefresh: pullToRefresh,
-                        //                     onTapDelete: () {
-                        //                       common_popup_widget(
-                        //                           context,
-                        //                           'Do you want to delete Dr. Interaction?',
-                        //                           'assets/images/deleteicon.svg', () async {
-                        //                         // Navigator.pop(context);
-                        //                         final DataService dataService = locator();
-                        //                         final DataResponseModel dataResponseModel =
-                        //                             await dataService.deleteData(
-                        //                           localDrInteractionList
-                        //                               .elementAt(index)
-                        //                               .interactionId,
-                        //                          box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-                        // box.get(Hardcoded.hiveBoxKey)!.accessToken,
-                        //                           "interaction | attendance | incident | volunteerEval",
-                        //                           "interaction",
-                        //                         );
-                        //                         // log("${dataResponseModel.success}");
-                        //                         if (dataResponseModel.success) {
-                        //                           delete.success();
-                        //                           Future.delayed(const Duration(seconds: 3),
-                        //                               () {
-                        //                             Navigator.pop(context);
-                        //                             AppHelper.buildErrorSnackbar(context,
-                        //                                 "Dr. Interaction deleted successfully");
-                        //                             store.dispatch(getDrInteractions(
-                        //                                 searchText: '',
-                        //                                 rotationId:
-                        //                                     widget.rotation!.rotationId.isEmpty
-                        //                                         ? selectedRotationId
-                        //                                         : widget.rotation!.rotationId,
-                        //                                 page: 1));
-                        //                           });
-                        //                         } else {
-                        //                           delete.error();
-                        //                           Future.delayed(const Duration(seconds: 3),
-                        //                               () {
-                        //                             delete.reset();
-                        //                           });
-                        //                         }
-                        //                       });
-                        //                     });
-                      }),
-                ),
                 // ),
               ),
             ),
@@ -656,7 +636,7 @@ class _DrInteractionNewListScreenState
           visible: isSearchClicked == false && isDataLoading && pageno == 1,
           child: common_loader(),
           replacement: Visibility(
-            visible: localDrInteractionList.isEmpty,
+            visible:localDrInteractionList.isEmpty,
             child: isSearchClicked
                 ? Center(
                     child: Padding(
@@ -685,104 +665,97 @@ class _DrInteractionNewListScreenState
                 onRefresh: () => pullToRefresh(),
                 color: Color(0xFFBBBBC6),
                 // child: SingleChildScrollView(physics: AlwaysScrollableScrollPhysics(),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Color.fromARGB(24, 203, 204, 208),
-                        blurRadius: 35.0, // soften the shadow
-                        spreadRadius: 10.0, //extend the shadow
-                        offset: Offset(
-                          15.0,
-                          15.0,
-                        ),
-                      )
-                    ],
-                  ),
-                  child: ListView.builder(
-                      controller: scrollController,
-                      itemCount: localDrInteractionList.length,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        List<Color> initialColor = [
-                          Color(Hardcoded.orange),
-                          Color(Hardcoded.blue),
-                          Color(Hardcoded.pink)
-                        ];
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Color.fromARGB(24, 203, 204, 208),
+                          blurRadius: 35.0, // soften the shadow
+                          spreadRadius: 10.0, //extend the shadow
+                          offset: Offset(
+                            15.0,
+                            15.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: localDrInteractionList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          List<Color> initialColor = [
+                            Color(Hardcoded.orange),
+                            Color(Hardcoded.blue),
+                            Color(Hardcoded.pink)
+                          ];
 
-                        List<Color> finalColorList = [];
+                          List<Color> finalColorList = [];
 
-                        for (var i = 0;
-                            i < localDrInteractionList.length;
-                            i++) {
-                          finalColorList
-                              .add(initialColor[i % initialColor.length]);
-                        }
-                        // Container(child: Text("sss"),);
-                        return UniDrInteractionContainer(
-                            color: finalColorList.elementAt(index),
-                            drIntraction:
-                                localDrInteractionList.elementAt(index),
-                            isFromDashboard:
-                                !widget.drInteractionListScreenVM.showAdd!,
-                            interactionDecCount: interactionDecCount,
-                            // pullToRefresh: addNewInteractionAsPerPageChange,
-                            pullToRefresh: pullToRefresh,
-                            onTapDelete: () {
-                              common_popup_widget(
-                                  context,
-                                  'Do you want to delete Dr. Interaction?',
-                                  'assets/images/deleteicon.svg', () async {
-                                // Navigator.pop(context);
-                                Box<UserLoginResponseHive>? box =
-                                    Boxes.getUserInfo();
-                                final DataService dataService = locator();
-                                final DataResponseModel dataResponseModel =
-                                    await dataService.deleteData(
-                                  localDrInteractionList
-                                          .elementAt(index)
-                                          .interactionId ??
-                                      "",
-                                  box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
-                                  box.get(Hardcoded.hiveBoxKey)!.accessToken,
-                                  "interaction | attendance | incident | volunteerEval",
-                                  "interaction",
-                                );
-                                // log("${dataResponseModel.success}");
-                                if (dataResponseModel.success) {
-                                  delete.success();
-                                  Future.delayed(const Duration(seconds: 3),
-                                      () {
-                                    Navigator.pop(context);
-                                    AppHelper.buildErrorSnackbar(context,
-                                        "Dr. Interaction deleted successfully");
-                                    store.dispatch(getDrInteractions(
-                                        searchText: '',
-                                        rotationId: widget
-                                                .drInteractionListScreenVM
-                                                .rotation!
-                                                .rotationId
-                                                .isEmpty
-                                            ? selectedRotationId
-                                            : widget.drInteractionListScreenVM
-                                                .rotation!.rotationId,
-                                        page: 1));
-                                  });
-                                } else {
-                                  delete.error();
-                                  Future.delayed(const Duration(seconds: 3),
-                                      () {
-                                    delete.reset();
-                                  });
-                                }
+                          for (var i = 0;
+                              i < localDrInteractionList.length;
+                              i++) {
+                            finalColorList
+                                .add(initialColor[i % initialColor.length]);
+                          }
+                          // Container(child: Text("sss"),);
+                          return UniDrInteractionContainer(
+                              color: finalColorList.elementAt(index),
+                              drIntraction:
+                                  localDrInteractionList.elementAt(index),
+                              isFromDashboard: !widget.drInteractionListScreenVM.  showAdd!,
+                              interactionDecCount: interactionDecCount,
+                              // pullToRefresh: addNewInteractionAsPerPageChange,
+                              pullToRefresh: pullToRefresh,
+                              onTapDelete: () {
+                                common_popup_widget(
+                                    context,
+                                    'Do you want to delete Dr. Interaction?',
+                                    'assets/images/deleteicon.svg', () async {
+                                  // Navigator.pop(context);
+                                  Box<UserLoginResponseHive>? box = Boxes.getUserInfo();
+                                  final DataService dataService = locator();
+                                  final DataResponseModel dataResponseModel =
+                                      await dataService.deleteData(
+                                    localDrInteractionList
+                                        .elementAt(index)
+                                        .interactionId??"",
+                                   box.get(Hardcoded.hiveBoxKey)!.loggedUserId,
+          box.get(Hardcoded.hiveBoxKey)!.accessToken,
+                                    "interaction | attendance | incident | volunteerEval",
+                                    "interaction",
+                                  );
+                                  // log("${dataResponseModel.success}");
+                                  if (dataResponseModel.success) {
+                                    delete.success();
+                                    Future.delayed(const Duration(seconds: 3),
+                                        () {
+                                      Navigator.pop(context);
+                                      AppHelper.buildErrorSnackbar(context,
+                                          "Dr. Interaction deleted successfully");
+                                      store.dispatch(getDrInteractions(
+                                          searchText: '',
+                                          rotationId:
+                                              widget.drInteractionListScreenVM.rotation!.rotationId.isEmpty
+                                                  ? selectedRotationId
+                                                  : widget.drInteractionListScreenVM.rotation!.rotationId,
+                                          page: 1));
+                                    });
+                                  } else {
+                                    delete.error();
+                                    Future.delayed(const Duration(seconds: 3),
+                                        () {
+                                      delete.reset();
+                                    });
+                                  }
+                                });
                               });
-                            });
-                      }),
+                        }),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
         // ),
       ),
     );
@@ -790,8 +763,7 @@ class _DrInteractionNewListScreenState
 
   Future<void> getRotationList() async {
     UserDatRepo userDatRepo = new UserDatRepo();
-    SMRotationListStudentJournal smRotationListStudentJournal =
-        await userDatRepo.getJournalRotationlistAction();
+    SMRotationListStudentJournal smRotationListStudentJournal = await userDatRepo.getJournalRotationlistAction();
     setState(() {
       rotationEvalList = smRotationListStudentJournal.data;
     });

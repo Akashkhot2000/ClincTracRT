@@ -1085,7 +1085,7 @@ class _CreateExceptionScreenState extends State<CreateExceptionScreen> {
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.black, // button text color
+                primary: Colors.black, // button text color
               ),
             ),
           ),

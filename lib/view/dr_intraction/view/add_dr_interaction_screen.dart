@@ -918,7 +918,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                                           overflow: TextOverflow.ellipsis,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .titleLarge
+                                              .headline6
                                               ?.copyWith(
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 14,
@@ -1022,7 +1022,7 @@ class _AddDrIntractionScreenState extends State<AddDrIntractionScreen> {
                                       //     // widget.hintText,
                                       //     maxLines: 1,
                                       //     overflow: TextOverflow.ellipsis,
-                                      //     style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                      //     style: Theme.of(context).textTheme.headline6?.copyWith(
                                       //         fontWeight: FontWeight.w400,
                                       //         fontSize: 14,
                                       //         color: Color(Hardcoded.greyText))),

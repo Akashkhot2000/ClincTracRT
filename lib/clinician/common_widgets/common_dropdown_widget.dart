@@ -1,3 +1,4 @@
+
 import 'package:clinicaltrac/clinician/common_widgets/selected_list_model.dart';
 import 'package:clinicaltrac/common/hardcoded.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,7 @@ typedef SelectedItemsCallBack = Function(List<SelectedListItem> selectedItems);
 
 typedef ListItemBuilder = Widget Function(int index);
 
-typedef BottomSheetListener = bool Function(
-    DraggableScrollableNotification draggableScrollableNotification);
+typedef BottomSheetListener = bool Function(DraggableScrollableNotification draggableScrollableNotification);
 
 class DropDown {
   /// This will give the list of data.
@@ -132,32 +132,28 @@ class _MainBodyState extends State<MainBody> {
           return Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 15.0, right: 15.0, top: 15.0, bottom: 5),
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0,bottom: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     /// Bottom sheet title text
-                    Expanded(
-                        child: widget.dropDown.bottomSheetTitle ?? Container()),
+                    Expanded(child: widget.dropDown.bottomSheetTitle ?? Container()),
 
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Material(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: SvgPicture.asset(
-                            'assets/images/close_modal.svg',
+                   Align(
+                        alignment: Alignment.centerRight,
+                        child: Material(
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: SvgPicture.asset(
+                              'assets/images/close_modal.svg',
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
+                        ),),
                   ],
                 ),
               ),
-
               /// A [TextField] that displays a list of suggestions as the user types with clear button.
               Visibility(
                 visible: widget.dropDown.isSearchVisible,
@@ -165,70 +161,64 @@ class _MainBodyState extends State<MainBody> {
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: TextFormField(
-                        controller: _editingController,
-                        cursorColor: Colors.black,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              color: Colors.black,
+                          controller: _editingController,
+                          cursorColor: Colors.black,
+                          style: Theme.of(context).textTheme.headline6?.copyWith(
+          fontWeight: FontWeight.w500,
+          fontSize: 14,
+          color:  Colors.black,
+          ),
+                          onChanged: (value) {
+                            isSearchClicked= true;
+                            _buildSearchList(value);
+                          },
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor:Color(Hardcoded.textFieldBgDisabled),
+                            contentPadding:
+                            const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
+                            hintText: widget.dropDown.searchHintText,
+                            hintStyle: Theme.of(context).textTheme.headline6?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                color: Color(Hardcoded.greyText)
+                                // color: widget.dropDown.searchHintText !="Search" ? Colors.black:Color(Hardcoded.greyText)
                             ),
-                        onChanged: (value) {
-                          isSearchClicked = true;
-                          _buildSearchList(value);
-                        },
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(Hardcoded.textFieldBgDisabled),
-                          contentPadding: const EdgeInsets.only(
-                              left: 0, bottom: 0, top: 0, right: 15),
-                          hintText: widget.dropDown.searchHintText,
-                          hintStyle: Theme.of(context)
-                              .textTheme
-                              .titleLarge
-                              ?.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: Color(Hardcoded.greyText)
-                                  // color: widget.dropDown.searchHintText !="Search" ? Colors.black:Color(Hardcoded.greyText)
-                                  ),
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              width: 0,
-                              style: BorderStyle.none,
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                             ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: SvgPicture.asset(
+                                'assets/images/search.svg',
+                              ),
+                            ),
+                            suffixIcon: !isSearchClicked ?SizedBox():GestureDetector(
+                              onTap: () {
+                                isSearchClicked = false;
+                                _buildSearchList("");
+                                _editingController.clear();
+                              },
+                              child: const Icon(
+                                Icons.clear_rounded,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: SvgPicture.asset(
-                              'assets/images/search.svg',
-                            ),
-                          ),
-                          suffixIcon: !isSearchClicked
-                              ? SizedBox()
-                              : GestureDetector(
-                                  onTap: () {
-                                    isSearchClicked = false;
-                                    _buildSearchList("");
-                                    _editingController.clear();
-                                  },
-                                  child: const Icon(
-                                    Icons.clear_rounded,
-                                    color: Colors.black,
-                                  ),
-                                ),
                         ),
                       ),
-                    ),
-                // AppTextField(
-                //   dropDown: widget.dropDown,
-                //   onTextChanged: _buildSearchList,
-                //   searchHintText: widget.dropDown.searchHintText,
-                // ),
+                    // AppTextField(
+                    //   dropDown: widget.dropDown,
+                    //   onTextChanged: _buildSearchList,
+                    //   searchHintText: widget.dropDown.searchHintText,
+                    // ),
               ),
-
               /// Listview (list of data with check box for multiple selection & on tile tap single selection)
               Expanded(
                 child: ListView.builder(
@@ -245,38 +235,27 @@ class _MainBodyState extends State<MainBody> {
                             onTap: () {
                               setState(() {
                                 mainList[index].isSelected = !isSelected;
-                                List<SelectedListItem> selectedList = widget
-                                    .dropDown.data
-                                    .where((element) =>
-                                        element.isSelected ?? false)
-                                    .toList();
+                                List<SelectedListItem> selectedList =
+                                widget.dropDown.data.where((element) => element.isSelected ?? false).toList();
                                 List<SelectedListItem> selectedNameList = [];
                                 for (var element in selectedList) {
                                   selectedNameList.add(element);
                                 }
-                                widget.dropDown.selectedItems
-                                    ?.call(selectedNameList);
+                                widget.dropDown.selectedItems?.call(selectedNameList);
                                 _onUnFocusKeyboardAndPop();
                               });
-                            },
-                            child: ListTile(
-                              title: widget.dropDown.listItemBuilder
-                                      ?.call(index) ??
-                                  Text(
-                                    mainList[index].name,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 15,
-                                            color: Colors.black),
+                            }, child: ListTile(
+                            title: widget.dropDown.listItemBuilder?.call(index) ??
+                                Text(
+                                  mainList[index].name,
+                                  style: Theme.of(context).textTheme.headline6?.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 15,
+                                      color: Colors.black
                                   ),
-                              trailing: isSelected
-                                  ? const Icon(
-                                      Icons.check_rounded,
-                                      color: Colors.green,
-                                    )
+                                ),
+                            trailing: isSelected
+                                  ? const Icon(Icons.check_rounded, color: Colors.green,)
                                   : SizedBox(),
                             ),
                             //     : const SizedBox(
@@ -304,8 +283,7 @@ class _MainBodyState extends State<MainBody> {
   /// This helps when search enabled & show the filtered data in list.
   _buildSearchList(String userSearchTerm) {
     final results = widget.dropDown.data
-        .where((element) =>
-            element.name.toLowerCase().contains(userSearchTerm.toLowerCase()))
+        .where((element) => element.name.toLowerCase().contains(userSearchTerm.toLowerCase()))
         .toList();
     if (userSearchTerm.isEmpty) {
       mainList = widget.dropDown.data;

@@ -329,7 +329,7 @@ class ExpansionTileCardState extends State<ExpansionTileCard>
   void didChangeDependencies() {
     final ThemeData theme = Theme.of(context);
     _headerColorTween
-      ..begin = theme.dialogBackgroundColor
+      ..begin = theme.backgroundColor
       ..end = widget.expandedTextColor ?? theme.colorScheme.secondary;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor

@@ -79,7 +79,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
   String selectedValue = '';
   int _currentIndex = -1;
   bool initialExpandState = false;
-  List<Widget> removeAll = [];
+  List<Widget> removeAll =[];
 
   final GlobalKey<ExpansionTileCardState> expansionTile = GlobalKey();
 
@@ -168,7 +168,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
                 // widget.hintText,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                style: Theme.of(context).textTheme.headline6?.copyWith(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
                     color: widget.textColor
@@ -278,8 +278,7 @@ class _ExpansionWidgetState extends State<ExpansionWidget> {
                                       onTap: () {
                                         expansionTile.currentState!.collapse();
                                         setState(() {
-                                          initialExpandState =
-                                              !initialExpandState;
+                                          initialExpandState = !initialExpandState;
                                           // _currentIndex = item;
                                           if (initialExpandState) {
                                             initialExpandState = false;

@@ -206,10 +206,9 @@ class _DailyJournalScreenState extends State<DailyJournalScreen> {
     return WillPopScope(
       onWillPop: () {
         widget.route == DailyJournalRoute.rotation
-            ? Navigator.pop(context)
-            : Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
-                arguments: BodySwitcherData(
-                    initialPage: Bottom_navigation_control.home));
+            ?  Navigator.pop(context):Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
+            arguments: BodySwitcherData(
+                initialPage: Bottom_navigation_control.home));
         return Future.value(true);
       },
       child: Scaffold(
@@ -245,12 +244,11 @@ class _DailyJournalScreenState extends State<DailyJournalScreen> {
                           fontSize: 22,
                         )),
             searchEnabeled: true,
-            onTap: () {
+            onTap: (){
               widget.route == DailyJournalRoute.rotation
-                  ? Navigator.pop(context)
-                  : Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
-                      arguments: BodySwitcherData(
-                          initialPage: Bottom_navigation_control.home));
+                  ?  Navigator.pop(context):  Navigator.pushReplacementNamed(context, Routes.bodySwitcher,
+                  arguments: BodySwitcherData(
+                      initialPage: Bottom_navigation_control.home));
             },
             image: !isSearchClicked
                 ? SvgPicture.asset(
@@ -332,21 +330,20 @@ class _DailyJournalScreenState extends State<DailyJournalScreen> {
                                                 color: Colors.black,
                                               ),
                                         ),
-                                        subTitle[0] != "All" &&
-                                                title[0] != "All"
+                                        subTitle[0] != "All" && title[0] != "All"
                                             ? Text(subTitle[0],
                                                 // widget.hintText,
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .titleLarge
+                                                    .headline6
                                                     ?.copyWith(
                                                         fontWeight:
                                                             FontWeight.w400,
                                                         fontSize: 14,
-                                                        color: Color(Hardcoded
-                                                            .greyText)))
+                                                        color: Color(
+                                                            Hardcoded.greyText)))
                                             : Container(),
                                       ])),
                             );
@@ -437,8 +434,7 @@ class _DailyJournalScreenState extends State<DailyJournalScreen> {
           floatingActionButton: Visibility(
             visible: widget.route == DailyJournalRoute.rotation,
             child: commonAddButton(onTap: () async {
-              await Navigator.pushNamed(
-                  context, Routes.dailyJournalDetailsScreen,
+              await Navigator.pushNamed(context, Routes.dailyJournalDetailsScreen,
                   arguments: DailyJournalData(
                       JournalId: widget.rotation?.rotationTitle,
                       rotationId: widget.rotation!.rotationId,
@@ -450,8 +446,7 @@ class _DailyJournalScreenState extends State<DailyJournalScreen> {
               // common_alert_pop(context, 'Successfully created\ndaily journal', 'assets/images/success_Icon.svg',(){Navigator.pop(context);});
             }),
             replacement: commonAddButton(onTap: () async {
-              await Navigator.pushNamed(
-                  context, Routes.dailyJournalDetailsScreen,
+              await Navigator.pushNamed(context, Routes.dailyJournalDetailsScreen,
                   arguments: DailyJournalData(
                       JournalId: '',
                       rotationId: '',
@@ -537,81 +532,79 @@ class _DailyJournalScreenState extends State<DailyJournalScreen> {
                     )
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 2, right: 2.0),
-                  child: CupertinoScrollbar(
+                child:Padding(
+    padding: const EdgeInsets.only(left:2,right: 2.0),
+    child:CupertinoScrollbar(
                     controller: _scrollController,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: Journallist.length,
-                      controller: _scrollController,
-                      //scrollDirection: Axis.vertical,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return CommonListContainerWidget(
-                          mainTitle: Journallist[index].rotationName,
-                          subTitle1: "Journal date : ",
-                          title1: DateFormat("MMM dd, yyyy")
-                              .format(Journallist[index].journalDate),
-                          subTitle3: "Hospital site : ",
-                          title3: Journallist[index].hospitalName,
-                          subTitle17: "Clinician response : ",
-                          title17: Journallist[index].clinicianResponse == true
-                              ? "Yes"
-                              : "No",
-                          subTitle18: "School response : ",
-                          title18: Journallist[index].schoolResponse == true
-                              ? "Yes"
-                              : "No",
-                          btnSvgImage: (!Journallist[index].clinicianResponse &&
-                                  !Journallist[index].schoolResponse)
-                              ? "assets/images/Edit.svg"
-                              : "assets/images/eye.svg",
-                          buttonTitle: (!Journallist[index].clinicianResponse &&
-                                  !Journallist[index].schoolResponse)
-                              ? "Edit"
-                              : "View",
-                          navigateButton: (!Journallist[index]
-                                      .clinicianResponse &&
-                                  !Journallist[index].schoolResponse)
-                              ? () async {
-                                  await Navigator.pushNamed(
-                                    context,
-                                    Routes.dailyJournalDetailsScreen,
-                                    arguments: DailyJournalData(
-                                        JournalId: Journallist[index].journalId,
-                                        rotationId:
-                                            Journallist[index].rotationId,
-                                        hospitalTitle:
-                                            Journallist[index].hospitalName,
-                                        hospitalId:
-                                            Journallist[index].hospitalSiteId,
-                                        viewType: DailyJournalViewType.edit,
-                                        journalDecCount: journalDecCount),
-                                  );
-                                  setState(() {
-                                    pullToRefresh();
-                                  });
-                                }
-                              : () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    Routes.dailyJournalDetailDataScreen,
-                                    arguments: DailyJournalDetailData(
+    child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: Journallist.length,
+                    controller: _scrollController,
+                    //scrollDirection: Axis.vertical,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return CommonListContainerWidget(
+                        mainTitle: Journallist[index].rotationName,
+                        subTitle1: "Journal date : ",
+                        title1: DateFormat("MMM dd, yyyy")
+                            .format(Journallist[index].journalDate),
+                        subTitle3: "Hospital site : ",
+                        title3: Journallist[index].hospitalName,
+                        subTitle17: "Clinician response : ",
+                        title17: Journallist[index].clinicianResponse == true
+                            ? "Yes"
+                            : "No",
+                        subTitle18: "School response : ",
+                        title18: Journallist[index].schoolResponse == true
+                            ? "Yes"
+                            : "No",
+                        btnSvgImage: (!Journallist[index].clinicianResponse &&
+                                !Journallist[index].schoolResponse)
+                            ? "assets/images/Edit.svg"
+                            : "assets/images/eye.svg",
+                        buttonTitle: (!Journallist[index].clinicianResponse &&
+                                !Journallist[index].schoolResponse)
+                            ? "Edit"
+                            : "View",
+                        navigateButton: (!Journallist[index].clinicianResponse &&
+                                !Journallist[index].schoolResponse)
+                            ? () async {
+                                await Navigator.pushNamed(
+                                  context,
+                                  Routes.dailyJournalDetailsScreen,
+                                  arguments: DailyJournalData(
                                       JournalId: Journallist[index].journalId,
-                                      // viewType: DailyJournalViewType.view,
-                                    ),
-                                  );
-                                },
-                        );
-                      },
-                    ),
+                                      rotationId: Journallist[index].rotationId,
+                                      hospitalTitle:
+                                          Journallist[index].hospitalName,
+                                      hospitalId:
+                                          Journallist[index].hospitalSiteId,
+                                      viewType: DailyJournalViewType.edit,
+                                      journalDecCount: journalDecCount),
+                                );
+                                setState(() {
+                                  pullToRefresh();
+                                });
+                              }
+                            : () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.dailyJournalDetailDataScreen,
+                                  arguments: DailyJournalDetailData(
+                                    JournalId: Journallist[index].journalId,
+                                    // viewType: DailyJournalViewType.view,
+                                  ),
+                                );
+                              },
+                      );
+                    },
                   ),
                 ),
               ),
             ),
           ),
         ),
+      ),
       ),
     );
   }
